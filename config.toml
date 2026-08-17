@@ -48,15 +48,12 @@ name = "Recipes"
 url = "/recipes/"
 description = "A small app for the recipes I actually cook."
 
+# Catch-all, deliberately last: keeps the curated list above short without
+# hiding anything, so a project doesn't need its own entry here to be findable.
 [[extra.projects]]
-name = "python-sigma"
-url = "https://sigma.calebstew.art/"
-description = "A Python API for parsing and converting Sigma detection rules."
-
-[[extra.projects]]
-name = "pwncat"
-url = "https://pwncat.readthedocs.io/"
-description = "A reverse and bind shell handler that gets out of your way."
+name = "All Repositories"
+url = "https://github.com/calebstewart?tab=repositories"
+description = "Everything else I've put on GitHub."
 
 # ---------------------------------------------------------------------------
 # Where to find me.

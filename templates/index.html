@@ -44,14 +44,22 @@
       <nav class="projects" aria-label="Projects and sites">
         <h2>Elsewhere</h2>
         <ul>
-          {% for project in config.extra.projects %}
+          {%- for project in config.extra.projects %}
+          {#- Detected rather than hardcoded, so a future off-site entry gets
+              the same treatment without touching this template. Internal links
+              (/resume/, /stewos/) stay in the current tab. -#}
+          {%- set external = project.url is starting_with("http") %}
           <li>
-            <a href="{{ project.url }}">
+            <a
+              href="{{ project.url }}"
+              {%- if external %} target="_blank" rel="noopener"{% endif %}
+            >
               <span class="name">{{ project.name }}</span>
               <span class="description">{{ project.description }}</span>
+              {%- if external %}<span class="visually-hidden"> (opens in a new tab)</span>{% endif %}
             </a>
           </li>
-          {% endfor %}
+          {%- endfor %}
         </ul>
       </nav>
 
