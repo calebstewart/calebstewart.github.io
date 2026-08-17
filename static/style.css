@@ -204,6 +204,155 @@ footer a:focus-visible {
   border-bottom-color: currentColor;
 }
 
+/* ---------------------------------------------------------------- Résumé */
+/* Wider than the landing page: the entry rows are two-column, so the prose
+   measure isn't the constraint here. */
+.resume-page main {
+  max-width: 46rem;
+}
+
+.resume-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.resume-header h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.resume-header h1 a:hover {
+  color: var(--accent);
+}
+
+.pdf-link {
+  flex: 0 0 auto;
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease;
+}
+
+.pdf-link:hover,
+.pdf-link:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin: 1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.contacts a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.contacts a:hover,
+.contacts a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: currentColor;
+}
+
+.cv-section {
+  margin-top: 2.5rem;
+}
+
+.cv-section > h2 {
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.cv-entry {
+  margin-top: 1.4rem;
+}
+
+.cv-entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
+.cv-entry-head .primary {
+  font-weight: 600;
+}
+
+.cv-entry-head .secondary {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.cv-entry-head .meta {
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--muted);
+}
+
+.cv-entry ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.cv-entry li {
+  margin-bottom: 0.25rem;
+}
+
+.cv-entry p {
+  margin: 0.5rem 0 0;
+}
+
+.cert-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cert-list li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: 0 1rem;
+  padding: 0.3rem 0;
+  align-items: baseline;
+}
+
+.cert-list .date,
+.cert-list .org {
+  font-size: 0.8rem;
+}
+
+.cert-list .org {
+  font-style: italic;
+  text-align: right;
+}
+
 /* -------------------------------------------------------------- Responsive */
 /* The tagline is long; below ~30rem it fights the avatar for width, so stack
    the header instead of letting it wrap to three lines. */
@@ -217,6 +366,23 @@ footer a:focus-visible {
   .avatar {
     width: 72px;
     height: 72px;
+  }
+
+  /* The PDF button drops below the name rather than squeezing it. */
+  .resume-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Certification rows stop being a grid and stack, so long names don't
+     collide with the credential body in a 5.5rem column. */
+  .cert-list li {
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  .cert-list .org {
+    text-align: left;
   }
 }
 

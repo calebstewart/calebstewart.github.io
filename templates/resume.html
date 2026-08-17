@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="{{ config.default_language }}">
+  {#-
+    Pages are loaded by name from config.extra.resume rather than via
+    get_section(). Two reasons: the role files set `render = false` so they
+    don't emit junk standalone URLs, and Zola drops render=false pages out of
+    section.pages — and this way the config list is the single source of truth
+    for which files are included, shared with resume.typ, so the PDF and the
+    page cannot disagree. Order still comes from each file's `weight`.
+  -#}
+  {%- set r = config.extra.resume -%}
+
+  {%- set_global experience = [] -%}
+  {%- for f in r.experience -%}
+    {%- set_global experience = experience | concat(with=get_page(path="resume/experience/" ~ f)) -%}
+  {%- endfor -%}
+
+  {%- set_global projects = [] -%}
+  {%- for f in r.projects -%}
+    {%- set_global projects = projects | concat(with=get_page(path="resume/projects/" ~ f)) -%}
+  {%- endfor -%}
+
+  {%- set certifications = load_data(path="data/certifications.yaml") -%}
+  {%- set education = load_data(path="data/education.yaml") -%}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ r.name }} — Résumé</title>
+    <meta name="description" content="{{ r.title }}" />
+    <link rel="canonical" href="{{ get_url(path='resume/') }}" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="{{ r.name }} — Résumé" />
+    <meta property="og:description" content="{{ r.title }}" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body class="resume-page">
+    <main>
+      <header class="resume-header">
+        <div class="identity">
+          <h1><a href="/">{{ r.name }}</a></h1>
+          <p class="tagline">{{ r.title | replace(from=", ", to=" · ") }}</p>
+        </div>
+        <a class="pdf-link" href="/resume.pdf" download>Download PDF</a>
+      </header>
+
+      <p class="contacts">
+        <span>{{ r.location }}</span>
+        <a href="mailto:{{ r.email }}">{{ r.email }}</a>
+        <a href="https://github.com/{{ r.github }}">github.com/{{ r.github }}</a>
+        <a href="https://gitlab.com/{{ r.gitlab }}">gitlab.com/{{ r.gitlab }}</a>
+        <a href="https://linkedin.com/in/{{ r.linkedin }}">linkedin.com/in/{{ r.linkedin }}</a>
+      </p>
+
+      <section class="cv-section">
+        <h2>Summary</h2>
+        {{ section.content | safe }}
+      </section>
+
+      <section class="cv-section">
+        <h2>Work Experience</h2>
+        {%- for role in experience %}
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <span class="primary">{{ role.extra.employer }}</span>
+            <span class="meta">{{ role.extra.location }}</span>
+          </div>
+          <div class="cv-entry-head">
+            <span class="secondary">{{ role.title }}</span>
+            <span class="meta">{{ role.extra.start }} – {{ role.extra.end }}</span>
+          </div>
+          {{ role.content | safe }}
+        </article>
+        {%- endfor %}
+      </section>
+
+      <section class="cv-section">
+        <h2>Certifications</h2>
+        <ul class="cert-list">
+          {%- for c in certifications %}
+          <li>
+            <span class="meta date">{{ c.date }}</span>
+            <span class="primary">{{ c.name }}<span class="meta">, Credential ID: {{ c.id }}</span></span>
+            <span class="meta org">{{ c.org }}</span>
+          </li>
+          {%- endfor %}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h2>Notable Projects</h2>
+        {%- for p in projects %}
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <span class="primary">{{ p.title }}</span>
+            <span class="meta">{{ p.extra.link }}</span>
+          </div>
+          <div class="cv-entry-head">
+            <span class="secondary">{{ p.extra.role }}</span>
+            <span class="meta">{{ p.extra.tools }}</span>
+          </div>
+          {{ p.content | safe }}
+        </article>
+        {%- endfor %}
+      </section>
+
+      <section class="cv-section">
+        <h2>Education</h2>
+        {%- for e in education %}
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <span class="primary">{{ e.university }}</span>
+            <span class="meta">{{ e.location }}</span>
+          </div>
+          <div class="cv-entry-head">
+            <span class="secondary">{{ e.degree }}</span>
+            <span class="meta">{{ e.start }} – {{ e.end }}</span>
+          </div>
+        </article>
+        {%- endfor %}
+      </section>
+
+      <footer>
+        <nav aria-label="Contact and profiles">
+          <ul>
+            <li><a href="/">Home</a></li>
+            {% for link in config.extra.social -%}
+            <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+            {% endfor -%}
+          </ul>
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

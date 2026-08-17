@@ -61,6 +61,43 @@ description = "A reverse and bind shell handler that gets out of your way."
 # ---------------------------------------------------------------------------
 # Where to find me.
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Resume. Read by BOTH `templates/resume.html` (web) and `resume.typ` (PDF),
+# so the two can't drift. Zola's config is TOML, and Typst reads TOML natively,
+# which is why this can be shared with no conversion step.
+# ---------------------------------------------------------------------------
+[extra.resume]
+name = "Caleb Stewart"
+title = "Software Engineer, Penetration Tester, Reverse Engineer"
+location = "Arlington, VA"
+email = "caleb.stewart94@gmail.com"
+github = "calebstewart"
+gitlab = "caleb.stewart"
+linkedin = "calebjstewart"
+
+# These lists are the single source of truth for BOTH which entries appear and
+# what order they appear in — the web template and resume.typ each walk them in
+# order, so the page and the PDF cannot disagree. Reorder here to reorder both.
+#
+# They're explicit rather than discovered because Typst has no directory
+# enumeration, by design, so that compilation stays hermetic. `nix flake check`
+# fails if a file exists on disk but is missing from these lists.
+experience = [
+  "huntress.md",
+  "cybercom.md",
+  "coast-guard-cpt.md",
+  "coast-guard-soc.md",
+  "cgc-bertholf.md",
+  "nsa.md",
+]
+projects = [
+  "cve-credits.md",
+  "pwncat.md",
+  "katana.md",
+  "ctf4hire.md",
+  "stewieos.md",
+]
+
 [[extra.social]]
 name = "Email"
 url = "mailto:caleb.stewart94@gmail.com"

@@ -28,8 +28,14 @@ jobs:
       - name: Cache Nix store
         uses: DeterminateSystems/magic-nix-cache-action@v14
 
+      # Catches a résumé content file that exists on disk but is missing from
+      # the lists in config.toml, which would silently drop it from the site.
+      - name: Check
+        run: nix flake check --print-build-logs
+
       # `nix build` runs the exact same derivation as `nix build` locally, so
-      # CI cannot drift from what you preview on your machine.
+      # CI cannot drift from what you preview on your machine. This builds the
+      # PDF résumé too and places it at /resume.pdf in the output.
       - name: Build site
         run: nix build .#site --print-build-logs
 
