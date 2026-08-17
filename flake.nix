@@ -26,6 +26,9 @@
               let
                 base = baseNameOf path;
               in
+              # `static/resume.pdf` is a local-preview artifact (see .gitignore).
+              # Excluded so a stale local build can't leak into the real output,
+              # which always takes the PDF from the `resume` derivation.
               !(builtins.elem base [
                 ".git"
                 ".github"
@@ -33,7 +36,8 @@
                 "result"
                 "flake.nix"
                 "flake.lock"
-              ]);
+              ])
+              && !(type == "regular" && baseNameOf (dirOf path) == "static" && base == "resume.pdf");
           };
 
           # cmarker renders the markdown bodies of the résumé content files.
@@ -130,8 +134,14 @@
           TYPST_FONT_PATHS = "${pkgs.roboto}/share/fonts";
 
           shellHook = ''
+            # `zola serve` only knows about static/, so the PDF has to land
+            # there for /resume.pdf to resolve during local preview.
+            resume-pdf() {
+              typst compile resume.typ static/resume.pdf && echo "-> static/resume.pdf"
+            }
+
             echo "zola $(zola --version | cut -d' ' -f2) — 'zola serve' to preview at http://127.0.0.1:1111"
-            echo "typst $(typst --version | cut -d' ' -f2) — 'typst compile resume.typ' for the PDF"
+            echo "typst $(typst --version | cut -d' ' -f2) — 'resume-pdf' to build the PDF for local preview"
           '';
         };
       });

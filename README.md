@@ -98,8 +98,16 @@ zola serve         # live-reloading preview at http://127.0.0.1:1111
 ```
 
 The dev shell also provides `typst` with `cmarker` and the Roboto font path
-already set, so `typst compile resume.typ` works by hand for quick iteration on
-the PDF layout.
+already set. `zola serve` only serves what's in `static/`, so it will 404 on
+`/resume.pdf` until you build one there:
+
+```console
+resume-pdf         # dev-shell helper: typst compile resume.typ static/resume.pdf
+```
+
+That file is gitignored and excluded from the flake's build inputs, so a stale
+local copy can never leak into a deploy — the published PDF always comes from
+the `resume` derivation.
 
 To build exactly what CI builds:
 

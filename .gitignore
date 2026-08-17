@@ -2,3 +2,7 @@ public/
 result
 result-*
 .direnv/
+
+# Built by `just-pdf` (or typst directly) so `zola serve` can serve /resume.pdf
+# during local preview. The deployed copy comes from `nix build`, not this file.
+static/resume.pdf
