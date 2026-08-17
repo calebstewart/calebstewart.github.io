@@ -9,6 +9,6 @@ start = "Feb 2019"
 end = "Jun 2020"
 +++
 
-- First responder for numerous network security incidents threatening National Critical Infrastructure
+- First responder for numerous network security incidents threatening National Critical Infrastructure.
 - Developed SOP and training requirements for incoming personnel.
-- Procured, configured and deployed state of the art incident response hardware platform.
+- Procured, configured and deployed state-of-the-art incident response hardware platform.

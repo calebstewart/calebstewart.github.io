@@ -9,5 +9,5 @@ start = "May 2016"
 end = "Nov 2017"
 +++
 
-- Responsible for combat and communications equiment and operational planning.
-- Assistant Command Security Officer ‑ managed physical, information and operational security programs for entire crew.
+- Responsible for combat and communications equipment and operational planning.
+- Assistant Command Security Officer — managed physical, information and operational security programs for entire crew.
