@@ -25,8 +25,12 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v22
 
-      - name: Cache Nix store
-        uses: DeterminateSystems/magic-nix-cache-action@v14
+      # No binary cache step here on purpose. magic-nix-cache-action now
+      # attempts a FlakeHub login and fails the step without an account, which
+      # annotates every run red while the build succeeds anyway. Everything
+      # this build needs (zola, typst, roboto) substitutes from cache.nixos.org
+      # in well under a minute, so a cache buys little. If build time ever
+      # becomes a problem, FlakeHub Cache or actions/cache over /nix is the fix.
 
       # Catches a résumé content file that exists on disk but is missing from
       # the lists in config.toml, which would silently drop it from the site.
