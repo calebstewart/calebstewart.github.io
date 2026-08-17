@@ -1,0 +1,82 @@
+# Zola configuration. Docs: https://www.getzola.org/documentation/getting-started/configuration/
+#
+# `base_url` only affects absolute URLs Zola generates itself (canonical link,
+# feeds, `get_url`). Every link in `[extra]` below is either a root-relative
+# path or a full external URL, so the site keeps working both at
+# https://calebstewart.github.io and later at https://calebstew.art.
+base_url = "https://calebstew.art"
+
+title = "Caleb Stewart"
+description = "Software engineer, penetration tester, and reverse engineer."
+default_language = "en"
+
+compile_sass = false
+build_search_index = false
+generate_feeds = false
+minify_html = true
+
+[markdown]
+smart_punctuation = true
+
+[extra]
+tagline = "Software Engineer · Penetration Tester · Reverse Engineer"
+
+# Served straight from GitHub so it tracks whatever avatar the account has —
+# nothing to re-upload here when you change it. The path takes the *numeric*
+# user id, not the username. `s` is the requested pixel size: it's 2x the
+# displayed 88px so the image stays sharp on HiDPI screens.
+avatar = "https://avatars.githubusercontent.com/u/7529189?s=176&v=4"
+avatar_alt = "Caleb Stewart"
+
+# ---------------------------------------------------------------------------
+# Things I run. Root-relative paths ("/stewos/") point at GitHub Pages project
+# sites under this same account, so they resolve correctly on whichever domain
+# this landing page is currently served from.
+# ---------------------------------------------------------------------------
+[[extra.projects]]
+name = "Resume"
+url = "/resume/"
+description = "Where I've worked and what I've built."
+
+[[extra.projects]]
+name = "StewOS"
+url = "/stewos/"
+description = "My NixOS system and Home Manager configurations."
+
+[[extra.projects]]
+name = "Recipes"
+url = "/recipes/"
+description = "A small app for the recipes I actually cook."
+
+[[extra.projects]]
+name = "python-sigma"
+url = "https://sigma.calebstew.art/"
+description = "A Python API for parsing and converting Sigma detection rules."
+
+[[extra.projects]]
+name = "pwncat"
+url = "https://pwncat.readthedocs.io/"
+description = "A reverse and bind shell handler that gets out of your way."
+
+# ---------------------------------------------------------------------------
+# Where to find me.
+# ---------------------------------------------------------------------------
+[[extra.social]]
+name = "Email"
+url = "mailto:caleb.stewart94@gmail.com"
+
+[[extra.social]]
+name = "GitHub"
+url = "https://github.com/calebstewart"
+
+[[extra.social]]
+name = "GitLab"
+url = "https://gitlab.com/caleb.stewart"
+
+[[extra.social]]
+name = "LinkedIn"
+url = "https://linkedin.com/in/calebjstewart"
+
+[[extra.social]]
+name = "Source"
+url = "https://github.com/calebstewart/calebstewart.github.io"

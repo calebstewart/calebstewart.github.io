@@ -1,0 +1,233 @@
+/* --------------------------------------------------------------------------
+   Palette. Light values live on :root so a color always has a definition
+   outside of any media query; the dark block only swaps the tokens.
+   -------------------------------------------------------------------------- */
+:root {
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --border: #e3e1dc;
+  --text: #201f1c;
+  --muted: #6b6862;
+  --accent: #9a5b2e;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto,
+    "Helvetica Neue", sans-serif;
+  --font-mono:
+    ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --measure: 34rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16151a;
+    --surface: #1d1c22;
+    --border: #302e37;
+    --text: #e8e6e1;
+    --muted: #9b968e;
+    --accent: #d9a066;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: clamp(2.5rem, 8vh, 6rem) 1.5rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------------------- Header */
+header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* width/height are set on the element too, so the layout doesn't reflow when
+   the avatar arrives from GitHub. `--bg` fills the circle until it loads. */
+.avatar {
+  flex: 0 0 auto;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+.identity {
+  min-width: 0;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 6vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Sized to clear the avatar without wrapping at the default measure. If you
+   lengthen the tagline in config.toml, check it here first. */
+.tagline {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------------- Intro */
+.intro {
+  margin-top: 2.5rem;
+}
+
+.intro p {
+  margin: 0 0 1.1rem;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------------ Projects */
+.projects {
+  margin-top: 3.25rem;
+}
+
+.projects h2,
+footer h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.projects ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.projects li {
+  border-bottom: 1px solid var(--border);
+}
+
+.projects a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  padding: 0.85rem 0.5rem;
+  margin: 0 -0.5rem;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.projects .name {
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+
+.projects .description {
+  flex: 1 1 14rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.projects a:hover,
+.projects a:focus-visible {
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.projects a:hover .description,
+.projects a:focus-visible .description {
+  color: var(--text);
+}
+
+/* -------------------------------------------------------------------- Footer */
+footer {
+  margin-top: 3.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease;
+}
+
+footer a:hover,
+footer a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: currentColor;
+}
+
+/* -------------------------------------------------------------- Responsive */
+/* The tagline is long; below ~30rem it fights the avatar for width, so stack
+   the header instead of letting it wrap to three lines. */
+@media (max-width: 30rem) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+/* ------------------------------------------------------------------- A11y */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
