@@ -44,6 +44,11 @@ url = "/stewos/"
 description = "My NixOS system and Home Manager configurations."
 
 [[extra.projects]]
+name = "AI Slop"
+url = "/ai-slop/"
+description = "Agent skills and prompt scaffolding I actually use."
+
+[[extra.projects]]
 name = "Recipes"
 url = "/recipes/"
 description = "A small app for the recipes I actually cook."
