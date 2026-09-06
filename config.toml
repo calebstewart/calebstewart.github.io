@@ -53,6 +53,11 @@ name = "Recipes"
 url = "/recipes/"
 description = "A small app for the recipes I actually cook."
 
+[[extra.projects]]
+name = "NixOS Update Manager"
+url = "/nixos-update-manager/"
+description = "A tray daemon that checks, builds and applies NixOS flake updates."
+
 # Catch-all, deliberately last: keeps the curated list above short without
 # hiding anything, so a project doesn't need its own entry here to be findable.
 [[extra.projects]]
